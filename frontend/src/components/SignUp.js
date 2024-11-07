@@ -10,11 +10,10 @@ const SignUp = () => {
     const [verificationCode, setVerificationCode] = useState('');
     const [isVerified, setIsVerified] = useState(false);
 
-    // Function to handle sending verification email
     const sendVerificationEmail = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/send-verification', {
+            const response = await fetch('http://127.0.0.1:5002/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -31,14 +30,13 @@ const SignUp = () => {
         }
     };
 
-    // Function to handle verifying the code
     const verifyEmailCode = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/verify-email', {
+            const response = await fetch('http://127.0.0.1:5002/verify-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, verificationCode })
+                body: JSON.stringify({ email, code: verificationCode })
             });
             if (response.ok) {
                 setIsVerified(true);
@@ -52,13 +50,24 @@ const SignUp = () => {
         }
     };
 
+    // Test connection function
+    const testConnection = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:5002/ping');
+            const data = await response.json();
+            alert(`Response from server: ${data.message}`);
+        } catch (error) {
+            console.error('Error connecting to server:', error);
+        }
+    };
+
     return (
         <div className="auth-container">
             <header className="auth-header">
                 <h1>Sign Up for Two Duo Pair</h1>
             </header>
             <main className="auth-content">
-                <form className="auth-form" onSubmit={isVerified ? sendVerificationEmail : verifyEmailCode}>
+                <form className="auth-form" onSubmit={verificationSent && !isVerified ? verifyEmailCode : sendVerificationEmail}>
                     <label>
                         Username:
                         <input 
@@ -99,6 +108,9 @@ const SignUp = () => {
                     )}
                     <button type="submit" className="auth-submit">
                         {verificationSent && !isVerified ? 'Verify Code' : 'Sign Up'}
+                    </button>
+                    <button type="button" onClick={testConnection}>
+                        Test Connection
                     </button>
                 </form>
             </main>
