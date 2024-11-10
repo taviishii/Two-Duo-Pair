@@ -1,0 +1,140 @@
+/* AddressForm.css */
+
+* {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffe3f1; /* Softer pink */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.header nav a {
+    margin-left: 20px;
+    color: #ff4da6;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.header nav a:hover {
+    color: #c7437b;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.welcome-text {
+    font-size: 2.5em;
+    color: #ff4da6;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.box {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+.box h3 {
+    color: #333333;
+    margin-bottom: 25px;
+    font-size: 1.75em;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    padding: 9px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    background-color: #f8f8f8;
+    transition: border 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #ff4da6;
+    outline: none;
+}
+
+.error-text {
+    color: #ff4da6;
+    font-size: 0.9em;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #ff4da6;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.1em;
+    margin-top: 20px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #ea6aaa;
+    transform: scale(1.05);
+}
+
+.footer {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #555;
+    text-align: center;
+}
+
+.footer a {
+    color: #ff4da6;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #c7437b;
+    text-decoration: underline;
+}
