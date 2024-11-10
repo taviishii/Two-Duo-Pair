@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Temporary storage for users and verification codes
-let users = {}; // Store users with email as key (e.g., { "user@example.com": { verified: false } })
+let users = {}; 
 let verificationCodes = {};
 
 // Nodemailer transporter setup
@@ -27,6 +27,11 @@ app.get('/', (req, res) => {
     res.send('Server is up and running!');
 });
 
+// Simple test route to check backend connectivity
+app.get('/ping', (req, res) => {
+    res.json({ message: 'pong' });
+});
+
 // Route to handle user registration and send verification code
 app.post('/register', (req, res) => {
     const { email } = req.body;
@@ -39,7 +44,7 @@ app.post('/register', (req, res) => {
     // Generate and store verification code
     const verificationCode = crypto.randomInt(100000, 999999).toString();
     verificationCodes[email] = verificationCode;
-    users[email] = { verified: false }; // Store user with initial "unverified" status
+    users[email] = { verified: false }; 
 
     // Send verification code via email
     const mailOptions = {
@@ -59,12 +64,13 @@ app.post('/register', (req, res) => {
 });
 
 // Route to verify the email
-app.post('/verify', (req, res) => {
+app.post('/verify-email', (req, res) => {
     const { email, code } = req.body;
+    console.log('Received verify-email request:', req.body); // Log request data
 
     if (verificationCodes[email] === code) {
-        users[email].verified = true; // Mark user as verified
-        delete verificationCodes[email]; // Remove verification code
+        users[email].verified = true; 
+        delete verificationCodes[email]; 
         res.status(200).json({ message: 'Email verified successfully' });
     } else {
         res.status(400).json({ message: 'Invalid verification code' });
@@ -85,7 +91,7 @@ app.post('/login', (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
